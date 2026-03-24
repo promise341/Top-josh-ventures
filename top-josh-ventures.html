@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top Josh Ventures – Premium Farm Produce Merchants</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: #0e1a0a;
+    color: #f0ead6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px;
+    background: rgba(10, 22, 6, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(180, 140, 40, 0.25);
+    animation: slideDown 0.8s ease forwards;
+  }
+  @keyframes slideDown { from { transform: translateY(-80px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 46px; height: 46px;
+    background: linear-gradient(135deg, #c8860a, #e8b84b);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 0 18px rgba(200, 134, 10, 0.55);
+  }
+  .logo-text { line-height: 1.1; }
+  .logo-text span:first-child {
+    display: block; font-family: 'Playfair Display', serif;
+    font-size: 17px; font-weight: 900; color: #e8b84b; letter-spacing: 1px;
+  }
+  .logo-text span:last-child {
+    display: block; font-size: 10px; text-transform: uppercase;
+    letter-spacing: 3px; color: #a8c87a;
+  }
+
+  nav ul { list-style: none; display: flex; gap: 36px; }
+  nav ul a {
+    text-decoration: none; color: #d4e8a0; font-size: 13px;
+    text-transform: uppercase; letter-spacing: 2px; font-weight: 700;
+    transition: color 0.3s;
+    position: relative;
+  }
+  nav ul a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 2px; background: #e8b84b;
+    transition: width 0.3s;
+  }
+  nav ul a:hover { color: #e8b84b; }
+  nav ul a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: linear-gradient(135deg, #c8860a, #e8b84b);
+    color: #0e1a0a !important; padding: 10px 24px; border-radius: 25px;
+    font-weight: 700 !important; font-size: 12px !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+    box-shadow: 0 4px 16px rgba(200,134,10,0.4);
+  }
+  .nav-cta:hover { transform: scale(1.05) !important; box-shadow: 0 6px 24px rgba(200,134,10,0.6) !important; }
+  .nav-cta::after { display: none !important; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background:
+      linear-gradient(to bottom, rgba(10,22,6,0.55) 0%, rgba(10,22,6,0.75) 60%, #0e1a0a 100%),
+      url('/cocoa.jpg') center/cover no-repeat;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 20px 60px;
+    position: relative; overflow: hidden;
+  }
+
+  /* floating leaf particles */
+  .leaf {
+    position: absolute; font-size: 22px; opacity: 0.18;
+    animation: floatLeaf linear infinite;
+  }
+  .leaf:nth-child(1)  { left: 5%;  top: 20%; animation-duration: 14s; animation-delay: 0s; }
+  .leaf:nth-child(2)  { left: 15%; top: 70%; animation-duration: 18s; animation-delay: 3s; }
+  .leaf:nth-child(3)  { left: 80%; top: 15%; animation-duration: 12s; animation-delay: 1s; }
+  .leaf:nth-child(4)  { left: 90%; top: 60%; animation-duration: 16s; animation-delay: 5s; }
+  .leaf:nth-child(5)  { left: 50%; top: 80%; animation-duration: 20s; animation-delay: 2s; }
+  @keyframes floatLeaf {
+    0%   { transform: translateY(0)   rotate(0deg);   opacity: 0.18; }
+    50%  { transform: translateY(-60px) rotate(180deg); opacity: 0.28; }
+    100% { transform: translateY(0)   rotate(360deg); opacity: 0.18; }
+  }
+
+  .hero-content { max-width: 800px; }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(200,134,10,0.2);
+    border: 1px solid rgba(200,134,10,0.5);
+    color: #e8b84b; font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; padding: 8px 20px; border-radius: 25px;
+    margin-bottom: 24px;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 900; line-height: 1.0;
+    color: #f0ead6;
+    animation: fadeUp 1s ease 0.5s both;
+  }
+  .hero-title span { color: #e8b84b; display: block; }
+
+  .hero-sub {
+    font-size: 18px; color: #b0c890; margin: 24px auto 40px;
+    max-width: 560px; line-height: 1.7;
+    animation: fadeUp 1s ease 0.7s both;
+    font-weight: 300;
+  }
+
+  .hero-btns {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 1s ease 0.9s both;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #c8860a, #e8b84b);
+    color: #0e1a0a; padding: 16px 36px; border-radius: 40px;
+    text-decoration: none; font-weight: 700; font-size: 14px;
+    letter-spacing: 1px; text-transform: uppercase;
+    box-shadow: 0 6px 28px rgba(200,134,10,0.5);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(200,134,10,0.65); }
+
+  .btn-outline {
+    border: 2px solid rgba(168,200,122,0.6);
+    color: #a8c87a; padding: 16px 36px; border-radius: 40px;
+    text-decoration: none; font-weight: 700; font-size: 14px;
+    letter-spacing: 1px; text-transform: uppercase;
+    transition: background 0.3s, color 0.3s;
+  }
+  .btn-outline:hover { background: rgba(168,200,122,0.1); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* scroll indicator */
+  .scroll-hint {
+    position: absolute; bottom: 36px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(168,200,122,0.6); font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  .scroll-hint::after {
+    content: '';
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, rgba(168,200,122,0.6), transparent);
+  }
+  @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+  /* ── STATS ── */
+  .stats-bar {
+    background: linear-gradient(90deg, #1a2f0e, #223a12, #1a2f0e);
+    padding: 28px 60px;
+    display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;
+    border-top: 2px solid rgba(200,134,10,0.3);
+    border-bottom: 2px solid rgba(200,134,10,0.3);
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900;
+    color: #e8b84b;
+  }
+  .stat-lbl { font-size: 11px; color: #a8c87a; text-transform: uppercase; letter-spacing: 2px; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 60px; }
+  .section-tag {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 4px;
+    color: #e8b84b; margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(30px, 4vw, 50px);
+    font-weight: 900; color: #f0ead6; line-height: 1.15; margin-bottom: 18px;
+  }
+  .section-title em { color: #e8b84b; font-style: normal; }
+  .section-lead { color: #90a870; font-size: 16px; line-height: 1.7; max-width: 560px; }
+
+  /* ── ABOUT ── */
+  #about {
+    background: #111c08;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .about-img-wrap {
+    position: relative;
+  }
+  .uncle-photo-placeholder {
+    width: 100%; aspect-ratio: 3/4; border-radius: 20px;
+    background: linear-gradient(135deg, #1a2f0e 0%, #223a12 40%, #1a2f0e 100%);
+    border: 2px dashed rgba(200,134,10,0.5);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; cursor: pointer;
+    transition: border-color 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .uncle-photo-placeholder:hover { border-color: #e8b84b; }
+  .uncle-photo-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(200,134,10,0.08), transparent 70%);
+  }
+  .uncle-photo-placeholder span:first-child { font-size: 56px; opacity: 0.6; }
+  .uncle-photo-placeholder span:last-child {
+    font-size: 13px; color: #a8c87a; text-align: center; padding: 0 24px;
+    line-height: 1.5;
+  }
+  .about-corner {
+    position: absolute; bottom: -20px; right: -20px;
+    width: 120px; height: 120px;
+    background: linear-gradient(135deg, #c8860a, #e8b84b);
+    border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 11px; text-align: center; color: #0e1a0a;
+    font-weight: 700; line-height: 1.3; text-transform: uppercase; letter-spacing: 1px;
+    box-shadow: 0 6px 24px rgba(200,134,10,0.5);
+    animation: rotateBadge 8s linear infinite;
+  }
+  @keyframes rotateBadge { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .about-corner span { animation: rotateBadge 8s linear infinite reverse; }
+
+  .about-text { display: flex; flex-direction: column; gap: 28px; }
+  .about-text p { color: #90a870; font-size: 15px; line-height: 1.8; }
+  .founder-sig {
+    font-family: 'Playfair Display', serif; font-size: 28px;
+    color: #e8b84b; margin-top: 10px;
+  }
+  .founder-title { font-size: 12px; color: #a8c87a; letter-spacing: 2px; text-transform: uppercase; }
+
+  /* ── PRODUCTS ── */
+  #products { background: #0e1a0a; text-align: center; }
+  .products-header { max-width: 600px; margin: 0 auto 60px; }
+  .products-header .section-lead { margin: 0 auto; }
+
+  .products-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .product-card {
+    background: #111c08;
+    border: 1px solid rgba(168,200,122,0.12);
+    border-radius: 20px; overflow: hidden;
+    transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+    cursor: default;
+    position: relative;
+  }
+  .product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border-color: rgba(200,134,10,0.4);
+  }
+  .product-img {
+    width: 100%; height: 220px; object-fit: cover;
+    filter: brightness(0.85) saturate(1.2);
+    transition: filter 0.35s, transform 0.35s;
+  }
+  .product-card:hover .product-img { filter: brightness(1) saturate(1.4); transform: scale(1.03); }
+  .product-img-wrap { overflow: hidden; height: 220px; }
+
+  .product-body { padding: 28px 24px 32px; }
+  .product-icon { font-size: 32px; margin-bottom: 10px; }
+  .product-name {
+    font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700;
+    color: #f0ead6; margin-bottom: 10px;
+  }
+  .product-desc { color: #7a9460; font-size: 14px; line-height: 1.7; margin-bottom: 18px; }
+  .product-tag {
+    display: inline-block; background: rgba(200,134,10,0.15);
+    border: 1px solid rgba(200,134,10,0.35);
+    color: #e8b84b; font-size: 11px; padding: 5px 14px;
+    border-radius: 20px; letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .product-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #c8860a, #e8b84b, #a8c87a);
+    transform: scaleX(0); transition: transform 0.35s;
+    transform-origin: left;
+  }
+  .product-card:hover::after { transform: scaleX(1); }
+
+  /* ── WHY US ── */
+  #why {
+    background: linear-gradient(135deg, #111c08, #1a2f0e);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .why-img {
+    width: 100%; border-radius: 20px; overflow: hidden; position: relative;
+  }
+  .why-img img {
+    width: 100%; height: 480px; object-fit: cover;
+    border-radius: 20px; filter: brightness(0.8) saturate(1.3);
+  }
+  .why-img-overlay {
+    position: absolute; bottom: 24px; left: 24px;
+    background: rgba(10,22,6,0.85); border-radius: 14px; padding: 18px 24px;
+    border-left: 4px solid #e8b84b;
+  }
+  .why-img-overlay p { font-size: 13px; color: #a8c87a; margin-bottom: 4px; }
+  .why-img-overlay strong { font-family: 'Playfair Display', serif; font-size: 22px; color: #e8b84b; }
+
+  .features { display: flex; flex-direction: column; gap: 28px; margin-top: 40px; }
+  .feature {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 22px; border-radius: 14px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(168,200,122,0.08);
+    transition: background 0.3s, border-color 0.3s, transform 0.3s;
+  }
+  .feature:hover {
+    background: rgba(200,134,10,0.06);
+    border-color: rgba(200,134,10,0.2);
+    transform: translateX(8px);
+  }
+  .feature-icon {
+    min-width: 52px; height: 52px; border-radius: 14px;
+    background: linear-gradient(135deg, #c8860a, #e8b84b);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .feature h4 { color: #f0ead6; font-size: 16px; margin-bottom: 6px; }
+  .feature p { color: #7a9460; font-size: 13px; line-height: 1.6; }
+
+  /* ── LOCATION ── */
+  #location { background: #0e1a0a; }
+  .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 50px; }
+  .location-card {
+    background: #111c08; border: 1px solid rgba(168,200,122,0.1);
+    border-radius: 20px; overflow: hidden;
+  }
+  .map-placeholder {
+    width: 100%; height: 300px;
+    background: linear-gradient(135deg, #1a2f0e, #223a12, #1a2f0e);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; color: #a8c87a; font-size: 13px;
+    border-bottom: 1px solid rgba(168,200,122,0.1);
+  }
+  .map-placeholder span:first-child { font-size: 48px; }
+  .map-pin { animation: pinBounce 1.5s ease-in-out infinite; }
+  @keyframes pinBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+  .location-info { padding: 28px; }
+  .location-info h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: #f0ead6; margin-bottom: 16px; }
+  .info-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+  .info-row .icon { font-size: 18px; min-width: 24px; margin-top: 2px; }
+  .info-row div { font-size: 13px; color: #7a9460; line-height: 1.6; }
+  .info-row strong { color: #c8d8a0; }
+
+  .contact-form-card {
+    background: #111c08; border: 1px solid rgba(168,200,122,0.1);
+    border-radius: 20px; padding: 36px;
+  }
+  .contact-form-card h3 { font-family: 'Playfair Display', serif; font-size: 26px; color: #f0ead6; margin-bottom: 8px; }
+  .contact-form-card p { color: #7a9460; font-size: 14px; margin-bottom: 28px; }
+
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; font-size: 11px; color: #a8c87a; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(168,200,122,0.15);
+    color: #f0ead6; padding: 14px 18px; border-radius: 10px;
+    font-family: 'Lato', sans-serif; font-size: 14px;
+    outline: none; transition: border-color 0.3s;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: rgba(200,134,10,0.5);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-group select option { background: #111c08; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .submit-btn {
+    width: 100%; padding: 16px;
+    background: linear-gradient(135deg, #c8860a, #e8b84b);
+    border: none; border-radius: 10px; color: #0e1a0a;
+    font-family: 'Lato', sans-serif; font-weight: 700; font-size: 14px;
+    letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+    transition: opacity 0.3s, transform 0.2s;
+    margin-top: 6px;
+  }
+  .submit-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080f05;
+    border-top: 1px solid rgba(200,134,10,0.2);
+    padding: 60px 60px 30px;
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 50px; }
+  .footer-brand p { color: #7a9460; font-size: 14px; line-height: 1.7; margin: 16px 0 24px; max-width: 300px; }
+  .footer-social { display: flex; gap: 12px; }
+  .social-btn {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid rgba(168,200,122,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; transition: border-color 0.3s, background 0.3s;
+    cursor: pointer; text-decoration: none;
+  }
+  .social-btn:hover { border-color: #e8b84b; background: rgba(200,134,10,0.1); }
+
+  .footer-col h4 { color: #e8b84b; font-size: 12px; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col ul a { text-decoration: none; color: #7a9460; font-size: 13px; transition: color 0.3s; }
+  .footer-col ul a:hover { color: #a8c87a; }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(168,200,122,0.08);
+    padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: #4a6030;
+  }
+  .footer-bottom span em { color: #e8b84b; font-style: normal; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left  { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s, transform 0.7s; }
+  .reveal-right { opacity: 0; transform: translateX(40px);  transition: opacity 0.7s, transform 0.7s; }
+  .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    nav ul { display: none; }
+    section { padding: 70px 24px; }
+    #about, #why, .location-grid { grid-template-columns: 1fr; gap: 40px; }
+    .products-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+    .stats-bar { padding: 24px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon">🌿</div>
+    <div class="logo-text">
+      <span>Top Josh Ventures</span>
+      <span>Farm Produce Merchants</span>
+    </div>
+  </a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="#location" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <!-- leaf decorations -->
+  <div class="leaf">🍃</div>
+  <div class="leaf">🌿</div>
+  <div class="leaf">🍃</div>
+  <div class="leaf">🌱</div>
+  <div class="leaf">🍂</div>
+
+  <div class="hero-content">
+    <div class="hero-badge">🌾 Trusted Farm Produce Merchants Since Day One</div>
+    <h1 class="hero-title">
+      Top Josh
+      <span>Ventures</span>
+    </h1>
+    <p class="hero-sub">Premium buyers and sellers of Nigeria's finest cocoa, cashew seeds and kernel — sourced from the heart of Cross River State.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary">Explore Our Produce</a>
+      <a href="#location" class="btn-outline">Contact Us</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat reveal">
+    <div class="stat-num">3+</div>
+    <div class="stat-lbl">Premium Produce</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">Ikom</div>
+    <div class="stat-lbl">Cross River Base</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">100%</div>
+    <div class="stat-lbl">Quality Assured</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">B2B</div>
+    <div class="stat-lbl">Trade Ready</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-img-wrap reveal-left">
+    <!-- Replace the placeholder below with an <img> tag pointing to your uncle's photo -->
+    
+    <img class="uncle-photo-placeholder" src="photo_2026-03-24_11-33-40.jpg" alt="">
+      
+    <div class="about-corner"><span>Cocoa<br>Merchant<br>★</span></div>
+  </div>
+
+  <div class="about-text reveal-right">
+    <div>
+      <p class="section-tag">Our Story</p>
+      <h2 class="section-title">Nigeria's Finest<br><em>Farm Produce</em><br>Dealers</h2>
+    </div>
+    <p>Top Josh Ventures is a reputable agro-commodity trading company headquartered in Ikom, Cross River State. We specialise in the procurement, processing, and trading of premium farm produce — connecting local farmers to regional and international buyers.</p>
+    <p>With deep roots in the Cross River agricultural ecosystem, our expert team ensures every shipment meets the highest standards of quality and traceability. From rich cocoa pods to crisp cashew seeds and nutrient-dense kernel, we source the best nature has to offer.</p>
+    <div>
+      <div class="founder-sig">Chief Josh</div>
+      <div class="founder-title">Founder & Principal Merchant — Top Josh Ventures</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="products-header reveal">
+    <p class="section-tag">What We Trade</p>
+    <h2 class="section-title">Our Premium <em>Produce</em></h2>
+    <p class="section-lead">We deal in high-grade agricultural commodities straight from the farms of Cross River State, Nigeria.</p>
+  </div>
+
+  <div class="products-grid">
+    <!-- COCOA -->
+    <div class="product-card reveal">
+      <div class="product-img-wrap">
+        <img
+          class="product-img"
+          src="How-Off-Takers-Are-Transforming-Nigerias-Cocoa-and-African-Farming.jpg"
+          alt="Cocoa pods"
+          onerror="this.style.display='none'; this.parentElement.style.background='#1a3010'; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=font-size:64px>🍫</span>'"
+        >
+      </div>
+      <div class="product-body">
+        <div class="product-icon">🍫</div>
+        <div class="product-name">Premium Cocoa Beans</div>
+        <p class="product-desc">Sun-dried, fermented cocoa beans from the rich forests of Cross River. Our flagship commodity — sought after for its deep flavour profile and high butter content.</p>
+        <span class="product-tag">Grade A Cocoa</span>
+      </div>
+    </div>
+
+    <!-- CASHEW -->
+    <div class="product-card reveal">
+      <div class="product-img-wrap">
+        <img
+          class="product-img"
+          src="OIP.webp"
+          alt="Cashew seeds"
+          onerror="this.style.display='none'; this.parentElement.style.background='#1a3010'; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=font-size:64px>🥜</span>'"
+        >
+      </div>
+      <div class="product-body">
+        <div class="product-icon">🥜</div>
+        <div class="product-name">Cashew Seeds</div>
+        <p class="product-desc">Raw cashew nuts harvested fresh from thriving plantations across Cross River. Ideal for processors, exporters, and food manufacturers worldwide.</p>
+        <span class="product-tag">Export Quality</span>
+      </div>
+    </div>
+
+    <!-- KERNEL -->
+    <div class="product-card reveal">
+      <div class="product-img-wrap">
+        <img
+          class="product-img"
+          src="OIP2.webp"
+          alt="Palm kernel"
+          onerror="this.style.display='none'; this.parentElement.style.background='#1a3010'; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center'; this.parentElement.innerHTML='<span style=font-size:64px>🌾</span>'"
+        >
+      </div>
+      <div class="product-body">
+        <div class="product-icon">🌾</div>
+        <div class="product-name">Kernel Seeds</div>
+        <p class="product-desc">High-quality kernel seeds carefully selected and processed for maximum oil yield and purity. Widely used in the cosmetics, food, and industrial sectors.</p>
+        <span class="product-tag">High Yield</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="why-img reveal-left">
+    <img
+      src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&q=80"
+      alt="Farm field"
+      onerror="this.src=''; this.style.background='#1a3010'; this.style.display='block'"
+    >
+    <div class="why-img-overlay">
+      <p>Operating from</p>
+      <strong>Ikom, Cross River</strong>
+    </div>
+  </div>
+
+  <div class="reveal-right">
+    <p class="section-tag">Why Choose Us</p>
+    <h2 class="section-title">Trade With <em>Confidence</em></h2>
+    <p class="section-lead">We bring integrity, experience, and quality assurance to every transaction.</p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🌱</div>
+        <div>
+          <h4>Farm-Direct Sourcing</h4>
+          <p>We work directly with farmers in Ikom and surrounding areas, cutting out middlemen and ensuring fresher, better-priced produce.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">✅</div>
+        <div>
+          <h4>Strict Quality Control</h4>
+          <p>Every batch is inspected and graded before trade. We never compromise on the purity or standards of our commodities.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🤝</div>
+        <div>
+          <h4>Reliable Trade Partnerships</h4>
+          <p>Buyers and sellers trust us for consistent supply, fair pricing, and transparent dealings backed by years of experience.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🚚</div>
+        <div>
+          <h4>Logistics Support</h4>
+          <p>We assist with haulage coordination across Cross River State and beyond, ensuring timely delivery to your destination.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION & CONTACT -->
+<section id="location">
+  <div class="reveal">
+    <p class="section-tag">Find Us</p>
+    <h2 class="section-title">Our <em>Location</em> & Contact</h2>
+  </div>
+
+  <div class="location-grid">
+    <div>
+      <div class="location-card reveal">
+        <div class="map-placeholder">
+          <span class="map-pin">📍</span>
+          <span>Ikom, Cross River State, Nigeria</span>
+          <span style="font-size:11px; color:#4a6030; letter-spacing:2px; text-transform:uppercase">Tap for directions</span>
+        </div>
+        <div class="location-info">
+          <h3>Top Josh Ventures HQ</h3>
+          <div class="info-row">
+            <span class="icon">📍</span>
+            <div><strong>Address:</strong><br>Ikom, Cross River State, Calabar, Nigeria</div>
+          </div>
+          <div class="info-row">
+            <span class="icon">📞</span>
+            <div><strong>Phone:</strong><br>+234-6290-5708</div>
+          </div>
+          <div class="info-row">
+            <span class="icon">✉️</span>
+            <div><strong>Email:</strong><br>info@topjoshventures.com</div>
+          </div>
+          <div class="info-row">
+            <span class="icon">🕐</span>
+            <div><strong>Hours:</strong><br>Mon – Sat: 8:00 AM – 6:00 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-card reveal">
+      <h3>Send Us a Message</h3>
+      <p>Interested in buying or selling? Reach out and we'll respond promptly.</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+234...">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Produce of Interest</label>
+        <select>
+          <option value="">Select produce...</option>
+          <option>Cocoa Beans</option>
+          <option>Cashew Seeds</option>
+          <option>Kernel Seeds</option>
+          <option>All Produce</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your trade inquiry..."></textarea>
+      </div>
+      <button class="submit-btn">🌿 Send Inquiry</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo" style="text-decoration:none">
+        <div class="logo-icon">🌿</div>
+        <div class="logo-text">
+          <span>Top Josh Ventures</span>
+          <span>Farm Produce Merchants</span>
+        </div>
+      </a>
+      <p>Your trusted partner in premium agro-commodity trading. Rooted in Ikom, Cross River State — serving buyers and sellers across Nigeria and beyond.</p>
+      <div class="footer-social">
+        <a class="social-btn" href="#">📘</a>
+        <a class="social-btn" href="#">📸</a>
+        <a class="social-btn" href="#">💬</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#products">Our Produce</a></li>
+        <li><a href="#why">Why Choose Us</a></li>
+        <li><a href="#location">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Our Produce</h4>
+      <ul>
+        <li><a href="#">Cocoa Beans</a></li>
+        <li><a href="#">Cashew Seeds</a></li>
+        <li><a href="#">Kernel Seeds</a></li>
+        <li><a href="#">Bulk Trade Enquiry</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2025 <em>Top Josh Ventures</em>. All rights reserved.</span>
+    <span>Ikom, Cross River State, Nigeria 🇳🇬</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+  // Smooth nav active
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav ul a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? '#e8b84b' : '';
+    });
+  });
+
+  // Contact form submit
+  document.querySelector('.submit-btn').addEventListener('click', function() {
+    this.textContent = '✅ Message Sent!';
+    this.style.background = 'linear-gradient(135deg, #4a8030, #6ab050)';
+    setTimeout(() => {
+      this.textContent = '🌿 Send Inquiry';
+      this.style.background = '';
+    }, 3000);
+  });
+</script>
+
+</body>
+</html>
